@@ -528,6 +528,8 @@ class CSCPicker extends StatefulWidget {
   final double? dropdownDialogRadius;
   final DefaultCountry? defaultCountry;
 
+  final InputDecoration? inputDropDownDecoration;
+
   ///CSC Picker Constructor
   const CSCPicker(
       {Key? key,
@@ -545,7 +547,8 @@ class CSCPicker extends StatefulWidget {
       this.layout = Layout.horizontal,
       this.showStates = true,
       this.showCities = true,
-      this.defaultCountry})
+      this.defaultCountry,
+      this.inputDropDownDecoration})
       : super(key: key);
 
   @override
@@ -558,7 +561,7 @@ class _CSCPickerState extends State<CSCPicker> {
   List<String?> _states = [];
 
   String _selectedCity = "City";
-  String? _selectedCountry;
+  String? _selectedCountry = "Country";
   String _selectedState = "State";
   var responses;
 
@@ -572,7 +575,7 @@ class _CSCPickerState extends State<CSCPicker> {
   void _setDefaultCountry() {
     if (widget.defaultCountry != null) {
       print(_country[DefaultCountries[widget.defaultCountry]!]);
-      _onSelectedCountry(_country[DefaultCountries[widget.defaultCountry]!]!);
+      // _onSelectedCountry(_country[DefaultCountries[widget.defaultCountry]!]!);
     }
   }
 

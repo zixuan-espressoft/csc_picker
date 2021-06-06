@@ -15,6 +15,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
   final bool disabled;
 
   final Function onChanged;
+  final InputDecoration? inputDropDownDecoration;
 
   const DropdownWithSearch(
       {Key? key,
@@ -31,7 +32,8 @@ class DropdownWithSearch<T> extends StatelessWidget {
       this.disabledDecoration,
       this.searchBarRadius,
       this.dialogRadius,
-      this.disabled = false})
+      this.disabled = false,
+      this.inputDropDownDecoration})
       : super(key: key);
 
   @override
@@ -39,19 +41,19 @@ class DropdownWithSearch<T> extends StatelessWidget {
     return AbsorbPointer(
       absorbing: disabled,
       child: GestureDetector(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) => SearchDialog(
-                  placeHolder: placeHolder,
-                  title: title,
-                  searchInputRadius: searchBarRadius,
-                  dialogRadius: dialogRadius,
-                  titleStyle: dropdownHeadingStyle,
-                  itemStyle: itemStyle,
-                  items: items)).then((value) {
-            onChanged(value);
-            /* if(value!=null)
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) => SearchDialog(
+                    placeHolder: placeHolder,
+                    title: title,
+                    searchInputRadius: searchBarRadius,
+                    dialogRadius: dialogRadius,
+                    titleStyle: dropdownHeadingStyle,
+                    itemStyle: itemStyle,
+                    items: items)).then((value) {
+              onChanged(value);
+              /* if(value!=null)
                     {
                       onChanged(value);
                       _lastSelected = value;
@@ -60,37 +62,36 @@ class DropdownWithSearch<T> extends StatelessWidget {
                       print("Value NULL $value $_lastSelected");
                       onChanged(_lastSelected);
                     }*/
-          });
-        },
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          decoration: !disabled
-              ? decoration != null
-                  ? decoration
-                  : BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey.shade300, width: 1))
-              : disabledDecoration != null
-                  ? disabledDecoration
-                  : BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.grey.shade300,
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1)),
-          child: Row(
-            children: [
-              Expanded(
-                  child: Text(selected.toString(),
-                      overflow: TextOverflow.ellipsis,
-                      style: selectedItemStyle != null
-                          ? selectedItemStyle
-                          : TextStyle(fontSize: 14))),
-              Icon(Icons.keyboard_arrow_down_rounded)
-            ],
-          ),
-        ),
-      ),
+            });
+          },
+          child: TextField(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => SearchDialog(
+                      placeHolder: placeHolder,
+                      title: title,
+                      searchInputRadius: searchBarRadius,
+                      dialogRadius: dialogRadius,
+                      titleStyle: dropdownHeadingStyle,
+                      itemStyle: itemStyle,
+                      items: items)).then((value) {
+                onChanged(value);
+              });
+            },
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                ),
+                filled: true,
+                fillColor: disabled ? Colors.black12 : Colors.white,
+                hintText: selected.toString(),
+                labelText: selected.toString(),
+                suffixIcon: Icon(Icons.arrow_drop_down_circle_outlined)),
+          )),
     );
   }
 }

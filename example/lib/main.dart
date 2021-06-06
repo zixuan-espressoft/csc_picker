@@ -50,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ///Adding CSC Picker Widget in app
                 CSCPicker(
+                  layout: Layout.vertical,
+
                   ///Enable disable state dropdown [OPTIONAL PARAMETER]
                   showStates: true,
 

@@ -75,9 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       border:
                           Border.all(color: Colors.grey.shade300, width: 1)),
 
-                  ///Default Country
-                  defaultCountry: DefaultCountry.India,
-
                   ///selected item style [OPTIONAL PARAMETER]
                   selectedItemStyle: TextStyle(
                     color: Colors.black,

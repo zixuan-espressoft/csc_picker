@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWithSearch<T> extends StatelessWidget {
@@ -15,7 +16,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
   final bool disabled;
 
   final Function onChanged;
-  final InputDecoration? inputDropDownDecoration;
+  final Color borderColor;
 
   const DropdownWithSearch(
       {Key? key,
@@ -33,7 +34,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
       this.searchBarRadius,
       this.dialogRadius,
       this.disabled = false,
-      this.inputDropDownDecoration})
+      this.borderColor = const Color.fromRGBO(65, 178, 171, 1.0)})
       : super(key: key);
 
   @override
@@ -81,7 +82,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
             },
             decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2.0),
+                  borderSide: BorderSide(color: borderColor, width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 1.0),
@@ -90,7 +91,10 @@ class DropdownWithSearch<T> extends StatelessWidget {
                 fillColor: disabled ? Colors.black12 : Colors.white,
                 hintText: selected.toString(),
                 labelText: selected.toString(),
-                suffixIcon: Icon(Icons.arrow_drop_down_circle_outlined)),
+                suffixIcon: Icon(
+                  CupertinoIcons.chevron_down_circle,
+                  color: Color.fromRGBO(32, 14, 59, 1.0),
+                )),
           )),
     );
   }
